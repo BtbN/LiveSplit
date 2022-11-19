@@ -26,18 +26,6 @@ jobs:
         run: |
           git checkout -b ${{ github.head_ref }} || git checkout ${{ github.head_ref }}
 
-      - name: Install .NET 4.6.1 SDK
-        shell: pwsh
-        run: |
-          $Arguments = (
-            'modify', '--installPath', '"C:\Program Files\Microsoft Visual Studio\2022\Enterprise"',
-            '--quiet', '--norestart', '--nocache',
-            '--add', 'Microsoft.Net.Component.4.6.1.SDK',
-            '--add', 'Microsoft.Net.Component.4.6.1.TargetingPack'
-          )
-          $process = Start-Process -FilePath 'C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe' -ArgumentList $Arguments -Wait -PassThru -WindowStyle Hidden
-          if ($process.ExitCode -ne 0) { exit 1 }
-
       - name: Set up msbuild
         uses: microsoft/setup-msbuild@v1
 
