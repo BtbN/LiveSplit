@@ -10,7 +10,7 @@ namespace LiveSplit.Updates
         private static readonly string[] DescribeSplit = Describe.Split('-');
         public static readonly bool IsDirty = DescribeSplit.Last() == "dirty";
         public static readonly string LastTag = DescribeSplit[0];
-        public static readonly int CommitsSinceLastTag = int.Parse(DescribeSplit[1]);
+        public static readonly int CommitsSinceLastTag = DescribeSplit.Length > 1 ? int.Parse(DescribeSplit[1]) : 0;
         public static readonly string Version = new[] { LastTag }
             .Concat(CommitsSinceLastTag > 0 ? new[] { CommitsSinceLastTag.ToString() } : new string[0])
 #if DEBUG
