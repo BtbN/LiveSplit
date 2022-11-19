@@ -10,11 +10,11 @@ on:
 
 jobs:
   build:
-    runs-on: windows-2019
+    runs-on: windows-2022
 
     steps:
       - name: Checkout commit
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           submodules: recursive
 
@@ -46,13 +46,13 @@ jobs:
           Move-Item -path .\LiveSplit\bin\Release\Components\Noesis.Javascript.dll -destination .\LiveSplit.Server
 
       - name: Upload the Server component as an artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: LiveSplit.Server
           path: LiveSplit.Server
 
       - name: Upload the Counter component as an artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: LiveSplit.Counter
           path: LiveSplit/bin/Release/Components/LiveSplit.Counter.dll
@@ -73,7 +73,7 @@ jobs:
           Remove-Item swiftshader -Recurse
 
       - name: Upload build as an artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: LiveSplit_Build
           path: LiveSplit/bin/Release
