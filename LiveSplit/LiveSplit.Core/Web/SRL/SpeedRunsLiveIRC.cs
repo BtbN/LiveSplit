@@ -26,7 +26,7 @@ namespace LiveSplit.Web.SRL
                 StateChanged?.Invoke(this, RaceState);
             }
         }
-        protected IrcClient Client { get; set; }
+        protected StandardIrcClient Client { get; set; }
         public ITimerModel Model { get; set; }
 
         public bool IsConnected => Client.IsConnected;
@@ -60,7 +60,7 @@ namespace LiveSplit.Web.SRL
         public SpeedRunsLiveIRC(LiveSplitState state, ITimerModel model, IEnumerable<string> channels)
         {
             ChannelsToJoin = channels.ToList();
-            Client = new IrcClient();
+            Client = new StandardIrcClient();
             Client.ConnectFailed += Client_ConnectFailed;
             Client.Connected += Client_Connected;
             Client.Registered += Client_Registered;
@@ -493,7 +493,7 @@ namespace LiveSplit.Web.SRL
         {
             Username = username;
             Password = password;
-            Client.Connect(server, 6667, new IrcUserRegistrationInfo()
+            Client.Connect(server, 6667, false, new IrcUserRegistrationInfo()
             {
                 UserName = username,
                 NickName = username,
